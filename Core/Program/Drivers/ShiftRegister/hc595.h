@@ -8,12 +8,30 @@
 #pragma once
 
 #include <cstdint>
+#include <cassert>
+
 
 class Driver_HC595 {
 private:
-	uint8_t output = 0;
-
+	uint8_t _output = 0;
 
 public:
 
+	void SetBit(uint8_t bit) {
+		assert(bit < 8);
+		_output |= (1 << bit);
+	}
+
+	bool GetBit(uint8_t bit) {
+		assert(bit < 8);
+		return _output & (1 << bit);
+	}
+
+	void SetOutput(uint8_t output) {
+		_output = output;
+	}
+
+	uint8_t GetOutput() {
+		return _output;
+	}
 };
