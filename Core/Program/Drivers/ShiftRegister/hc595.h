@@ -10,8 +10,9 @@
 #include <cstdint>
 #include <cassert>
 
+namespace Hardware {
 
-class Driver_HC595 {
+class HC595 {
 private:
 	uint8_t _output = 0;
 
@@ -22,7 +23,7 @@ public:
 		_output |= (1 << bit);
 	}
 
-	bool GetBit(uint8_t bit) {
+	bool GetBit(uint8_t bit) const {
 		assert(bit < 8);
 		return _output & (1 << bit);
 	}
@@ -31,7 +32,9 @@ public:
 		_output = output;
 	}
 
-	uint8_t GetOutput() {
+	uint8_t GetOutput() const {
 		return _output;
 	}
 };
+
+}
