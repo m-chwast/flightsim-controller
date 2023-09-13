@@ -1,5 +1,6 @@
 Debug
-Drivers
+Drivers/CMSIS
+Drivers/STM32L1xx_HAL_Driver
 Middlewares
 STM32L152RETX_FLASH.ld
 STM32L152RETX_RAM.ld
