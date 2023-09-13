@@ -18,6 +18,9 @@ private:
 
 public:
 
+	GPIO_Output(GPIO_TypeDef* gpio, uint16_t pin)
+		: _gpio{gpio}, _pin{pin} {}
+
 	void SetLow() const {
 		HAL_GPIO_WritePin(_gpio, _pin, GPIO_PIN_SET);
 	}
@@ -32,5 +35,3 @@ public:
 };
 
 }
-
-
