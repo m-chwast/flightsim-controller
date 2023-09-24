@@ -18,12 +18,18 @@ class ShiftRegister {
 private:
 	Hardware::HC595 _register[bytesCount];
 
-	Hardware::GPIO_Output _srEnable;
-	Hardware::GPIO_Output _srClear;
-	Hardware::GPIO_Output _srStoreOutput;
+	const Hardware::GPIO_Output& _srEnable;
+	const Hardware::GPIO_Output& _srClear;
+	const Hardware::GPIO_Output& _srStoreOutput;
 
 public:
 
+	ShiftRegister(const Hardware::GPIO_Output& srEnable,
+			const Hardware::GPIO_Output& srClear,
+			const Hardware::GPIO_Output& srStoreOutput)
+	: _srEnable{srEnable}, _srClear{srClear}, _srStoreOutput{srStoreOutput} {
+
+	}
 };
 
 }
