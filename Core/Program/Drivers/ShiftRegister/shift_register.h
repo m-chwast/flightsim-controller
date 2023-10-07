@@ -28,8 +28,8 @@ public:
 
 	ShiftRegister(SPI_HandleTypeDef& spi,
 			const Hardware::GPIO_Output& srStoreOutput,
-			const Hardware::GPIO_Output& srEnable,
-			const Hardware::GPIO_Output& srClear)
+			const Hardware::GPIO_Output& srEnable = {nullptr, 0},
+			const Hardware::GPIO_Output& srClear = {nullptr, 0})
 	: _srEnable{srEnable}, _srClear{srClear}, _srStoreOutput{srStoreOutput}, _spi{spi} {
 
 	}
