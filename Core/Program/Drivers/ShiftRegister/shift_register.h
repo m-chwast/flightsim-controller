@@ -44,19 +44,28 @@ public:
 		}
 	}
 
+	//Updates the hardware with currently stored values
 	void Update() const {
+		std::array<uint8_t, bytesCount> data;
+		for(uint8_t i = 0; i < bytesCount; i++) {
+			data[i] = _register[i].GetOutput();
+		}
 
-	}
+		//io operations are not reentrant
+		taskENTER_CRITICAL();
 
-	void Write(const std::array<uint8_t, bytesCount>& data) {
-		Store(data);
-
-		auto dataCopy = data;
-		HAL_SPI_Transmit(&_spi, dataCopy.data(), data.size(), 100);
+		HAL_SPI_Transmit(&_spi, data.data(), data.size(), HAL_MAX_DELAY);
 
 		_srStoreOutput.SetHigh();
 		__NOP();
 		_srStoreOutput.SetLow();
+
+		taskEXIT_CRITICAL();
+	}
+
+	void Write(const std::array<uint8_t, bytesCount>& data) {
+		Store(data);
+		Update();
 	}
 };
 
