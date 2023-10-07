@@ -11,6 +11,8 @@
 #include "GPIO/gpio_pin.h"
 #include "main.h"
 #include <array>
+#include "FreeRTOS.h"
+#include "task.h"
 
 namespace Drivers {
 
@@ -35,10 +37,19 @@ public:
 
 	}
 
-	void Write(const std::array<uint8_t, bytesCount>& data) {
+	//Stores the values, but does not update the hardware
+	void Store(const std::array<uint8_t, bytesCount>& data) {
 		for(uint8_t i = 0; i < bytesCount; i++) {
 			_register[i].SetOutput(data[i]);
 		}
+	}
+
+	void Update() const {
+
+	}
+
+	void Write(const std::array<uint8_t, bytesCount>& data) {
+		Store(data);
 
 		auto dataCopy = data;
 		HAL_SPI_Transmit(&_spi, dataCopy.data(), data.size(), 100);
