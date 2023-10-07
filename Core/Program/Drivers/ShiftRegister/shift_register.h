@@ -35,6 +35,15 @@ public:
 			const Hardware::GPIO_Output& srClear = {nullptr, 0})
 	: _srEnable{srEnable}, _srClear{srClear}, _srStoreOutput{srStoreOutput}, _spi{spi} {
 
+		taskENTER_CRITICAL();
+
+		_srClear.SetHigh();
+		__NOP();
+		_srClear.SetLow();
+
+		_srEnable.SetLow();	// EN is active low
+
+		taskEXIT_CRITICAL();
 	}
 
 	//Stores the values, but does not update the hardware
