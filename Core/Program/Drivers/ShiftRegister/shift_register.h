@@ -9,6 +9,7 @@
 
 #include "ShiftRegister/hc595.h"
 #include "GPIO/gpio_pin.h"
+#include "main.h"
 
 namespace Drivers {
 
@@ -21,13 +22,15 @@ private:
 	const Hardware::GPIO_Output& _srEnable;
 	const Hardware::GPIO_Output& _srClear;
 	const Hardware::GPIO_Output& _srStoreOutput;
+	SPI_HandleTypeDef& _spi;
 
 public:
 
-	ShiftRegister(const Hardware::GPIO_Output& srEnable,
-			const Hardware::GPIO_Output& srClear,
-			const Hardware::GPIO_Output& srStoreOutput)
-	: _srEnable{srEnable}, _srClear{srClear}, _srStoreOutput{srStoreOutput} {
+	ShiftRegister(SPI_HandleTypeDef& spi,
+			const Hardware::GPIO_Output& srStoreOutput,
+			const Hardware::GPIO_Output& srEnable,
+			const Hardware::GPIO_Output& srClear)
+	: _srEnable{srEnable}, _srClear{srClear}, _srStoreOutput{srStoreOutput}, _spi{spi} {
 
 	}
 };
