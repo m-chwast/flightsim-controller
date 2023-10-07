@@ -23,6 +23,11 @@ public:
 		_output |= (1 << bit);
 	}
 
+	void ResetBit(uint8_t bit) {
+		assert(bit < 8);
+		_output &= ~(1 << bit);
+	}
+
 	bool GetBit(uint8_t bit) const {
 		assert(bit < 8);
 		return _output & (1 << bit);
