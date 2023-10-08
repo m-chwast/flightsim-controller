@@ -53,6 +53,12 @@ public:
 		HAL_GPIO_TogglePin(_gpio, _pin);
 		taskEXIT_CRITICAL();
 	}
+
+	void PulseHigh() const {
+		SetHigh();
+		__NOP();
+		SetLow();
+	}
 };
 
 }

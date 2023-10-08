@@ -65,11 +65,7 @@ public:
 		HAL_SPI_Transmit(&_spi, data.data(), data.size(), HAL_MAX_DELAY);
 		taskEXIT_CRITICAL();
 
-		_srStoreOutput.SetHigh();
-		__NOP();
-		_srStoreOutput.SetLow();
-
-
+		_srStoreOutput.PulseHigh();
 	}
 
 	void Write(const std::array<uint8_t, bytesCount>& data) {
