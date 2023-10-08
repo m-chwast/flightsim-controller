@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "Init/init.h"
+#include "Program/program.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,7 +95,7 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 
-  Init_CreateTasks();
+  Program_CreateTasks();
 
   TIM_StartAllContinuousTimers();
   /* USER CODE END 2 */
