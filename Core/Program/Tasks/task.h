@@ -35,4 +35,10 @@ public:
 	Task(const char* name, uint32_t stackSize, uint8_t priority) {
 		xTaskCreate(&Task::RunWrapper, name, stackSize, this, priority, &handle);
 	}
+
+	virtual ~Task() {
+#if INCLUDE_vTaskDelete
+		vTaskDelete(handle);
+#endif
+	}
 };
