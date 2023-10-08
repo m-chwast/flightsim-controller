@@ -1,6 +1,6 @@
 #include "Program/cprogram.h"
 #include "Program/program.h"
-#include "Tasks/Output/task_output.h"
+
 
 //function called from C code
 void Program_CreateTasks(void) {
@@ -26,7 +26,9 @@ void operator delete[](void* p) {
 }
 
 TaskOutput* Program::_taskOutput;
+TaskLogging* Program::_taskLogging;
 
 void Program::CreateTasks() {
 	_taskOutput = new TaskOutput();
+	_taskLogging = new TaskLogging();
 }
