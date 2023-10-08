@@ -19,9 +19,9 @@ private:
 	constexpr static uint16_t _stackSize = 512;
 	constexpr static uint8_t _priority = 1;
 
-	Hardware::GPIO_Output _sr_rclk = {SR_RCLK_GPIO_Port, SR_RCLK_Pin};
+	Hardware::GPIO_Output _srRclk = {SR_RCLK_GPIO_Port, SR_RCLK_Pin};
+	Drivers::ShiftRegister<1> _sr = Drivers::ShiftRegister<1>(hspi2, _srRclk);
 
-	Drivers::ShiftRegister<1> _sr = Drivers::ShiftRegister<1>(hspi2, &_sr_rclk);
 	uint8_t _output = 0;
 
 	virtual void Init() override;

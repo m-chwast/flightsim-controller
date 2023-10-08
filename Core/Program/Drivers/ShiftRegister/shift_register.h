@@ -22,30 +22,24 @@ class ShiftRegister {
 private:
 	Hardware::HC595 _register[bytesCount];
 
-	Hardware::GPIO_Output* const _srEnable;
-	Hardware::GPIO_Output* const _srClear;
-	Hardware::GPIO_Output* const _srStoreOutput;
+	Hardware::GPIO_Output& _srEnable;
+	Hardware::GPIO_Output& _srClear;
+	Hardware::GPIO_Output& _srStoreOutput;
 	SPI_HandleTypeDef& _spi;
 
 public:
 
 	ShiftRegister(SPI_HandleTypeDef& spi,
-			Hardware::GPIO_Output* srStoreOutput,
-			Hardware::GPIO_Output* srEnable = nullptr,
-			Hardware::GPIO_Output* srClear = nullptr)
+			Hardware::GPIO_Output& srStoreOutput,
+			Hardware::GPIO_Output& srEnable = Hardware::GPIO_Output::dummyGPIO,
+			Hardware::GPIO_Output& srClear = Hardware::GPIO_Output::dummyGPIO)
 	: _srEnable{srEnable}, _srClear{srClear}, _srStoreOutput{srStoreOutput}, _spi{spi} {
 
 		taskENTER_CRITICAL();
 
-		if(_srClear != nullptr) {
-			_srClear->SetHigh();
-			__NOP();
-			_srClear->SetLow();
-		}
+		_srClear.PulseHigh();
 
-		if(_srEnable != nullptr) {
-			_srEnable->SetLow();	// EN is active low
-		}
+		_srEnable.SetLow();	// EN is active low
 
 		taskEXIT_CRITICAL();
 	}
@@ -76,7 +70,7 @@ public:
 		HAL_SPI_Transmit(&_spi, data.data(), data.size(), HAL_MAX_DELAY);
 		taskEXIT_CRITICAL();
 
-		_srStoreOutput->PulseHigh();
+		_srStoreOutput.PulseHigh();
 	}
 
 	void Write(const std::array<uint8_t, bytesCount>& data) {
