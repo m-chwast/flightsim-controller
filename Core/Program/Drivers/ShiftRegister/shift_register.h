@@ -62,14 +62,14 @@ public:
 
 		//io operations are not reentrant
 		taskENTER_CRITICAL();
-
 		HAL_SPI_Transmit(&_spi, data.data(), data.size(), HAL_MAX_DELAY);
+		taskEXIT_CRITICAL();
 
 		_srStoreOutput.SetHigh();
 		__NOP();
 		_srStoreOutput.SetLow();
 
-		taskEXIT_CRITICAL();
+
 	}
 
 	void Write(const std::array<uint8_t, bytesCount>& data) {

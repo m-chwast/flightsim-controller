@@ -8,6 +8,8 @@
 #pragma once
 
 #include "gpio.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 namespace Hardware {
 
@@ -29,21 +31,27 @@ public:
 		if(!IsOperational()) {
 			return;
 		}
+		taskENTER_CRITICAL();
 		HAL_GPIO_WritePin(_gpio, _pin, GPIO_PIN_SET);
+		taskEXIT_CRITICAL();
 	}
 
 	void SetHigh() const {
 		if(!IsOperational()) {
 			return;
 		}
+		taskENTER_CRITICAL();
 		HAL_GPIO_WritePin(_gpio, _pin, GPIO_PIN_RESET);
+		taskEXIT_CRITICAL();
 	}
 
 	void Toggle() const {
 		if(!IsOperational()) {
 			return;
 		}
+		taskENTER_CRITICAL();
 		HAL_GPIO_TogglePin(_gpio, _pin);
+		taskEXIT_CRITICAL();
 	}
 };
 
