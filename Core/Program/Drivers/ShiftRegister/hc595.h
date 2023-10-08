@@ -28,6 +28,15 @@ public:
 		_output &= ~(1 << bit);
 	}
 
+	void WriteBit(uint8_t bit, bool isSet) {
+		if(isSet) {
+			SetBit(bit);
+		}
+		else {
+			ResetBit(bit);
+		}
+	}
+
 	bool GetBit(uint8_t bit) const {
 		assert(bit < 8);
 		return _output & (1 << bit);

@@ -53,6 +53,13 @@ public:
 		}
 	}
 
+	void StoreBit(uint8_t bit, bool isSet) {
+		assert(bit < bytesCount * 8);
+		uint8_t reg = bit / 8;
+		uint8_t bitInReg = bit % 8;
+		_register[reg].WriteBit(bitInReg, isSet);
+	}
+
 	//Updates the hardware with currently stored values
 	void Update() const {
 		std::array<uint8_t, bytesCount> data;

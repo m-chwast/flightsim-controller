@@ -16,7 +16,9 @@ static void TestTaskHandler(void* param) {
 	uint8_t output = 0;
 
 	while(true) {
-		testSR.Write({output});
+		testSR.Store({output});
+		testSR.StoreBit(7, output & 1);
+		testSR.Update();
 		output++;
 		vTaskDelay(pdMS_TO_TICKS(250));
 	}
