@@ -27,16 +27,7 @@ public:
 	GPIO_Output(GPIO_TypeDef* gpio, uint16_t pin)
 		: _gpio{gpio}, _pin{pin} {}
 
-	void SetLow() const {
-		if(!IsOperational()) {
-			return;
-		}
-		taskENTER_CRITICAL();
-		HAL_GPIO_WritePin(_gpio, _pin, GPIO_PIN_SET);
-		taskEXIT_CRITICAL();
-	}
-
-	void SetHigh() const {
+	void SetLow() {
 		if(!IsOperational()) {
 			return;
 		}
@@ -45,7 +36,16 @@ public:
 		taskEXIT_CRITICAL();
 	}
 
-	void Toggle() const {
+	void SetHigh() {
+		if(!IsOperational()) {
+			return;
+		}
+		taskENTER_CRITICAL();
+		HAL_GPIO_WritePin(_gpio, _pin, GPIO_PIN_SET);
+		taskEXIT_CRITICAL();
+	}
+
+	void Toggle() {
 		if(!IsOperational()) {
 			return;
 		}
@@ -54,7 +54,7 @@ public:
 		taskEXIT_CRITICAL();
 	}
 
-	void PulseHigh() const {
+	void PulseHigh() {
 		SetHigh();
 		__NOP();
 		SetLow();
