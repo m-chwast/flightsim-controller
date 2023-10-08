@@ -3,8 +3,21 @@
 #include "ShiftRegister/shift_register.h"
 #include "spi.h"
 
-void Init_CreateTasks(void) {
-	Drivers::ShiftRegister<2> testSR(hspi2, {SR_RCLK_GPIO_Port, SR_RCLK_Pin});
+static void TestTaskHandler(void* param);
 
-	testSR.Write({1, 2});
+void Init_CreateTasks(void) {
+	xTaskCreate(TestTaskHandler, "Test task", 512, nullptr, 2, nullptr);
+
+}
+
+static void TestTaskHandler(void* param) {
+	Drivers::ShiftRegister<1> testSR(hspi2, {SR_RCLK_GPIO_Port, SR_RCLK_Pin});
+
+	uint8_t output = 0;
+
+	while(true) {
+		testSR.Write({output});
+		output++;
+		vTaskDelay(pdMS_TO_TICKS(250));
+	}
 }
