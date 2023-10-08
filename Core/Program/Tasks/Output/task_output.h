@@ -16,6 +16,7 @@
 class TaskOutput final : public Task {
 private:
 
+	constexpr static const char* _name = "Output";
 	constexpr static uint16_t _stackSize = 512;
 	constexpr static uint8_t _priority = 1;
 
@@ -30,5 +31,5 @@ private:
 public:
 
 	TaskOutput()
-		: Task("Output", _stackSize, _priority) {}
+		: Task(_name, _stackSize, _priority) {}
 };
