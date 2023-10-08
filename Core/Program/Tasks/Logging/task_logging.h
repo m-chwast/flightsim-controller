@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Tasks/task.h"
+#include "usart.h"
 
 class TaskLogging final : public Task {
 private:
@@ -16,12 +17,15 @@ private:
 	constexpr static uint16_t _stackSize = 128;
 	constexpr static uint8_t _priority = 1;
 
+	UART_HandleTypeDef& _huart;
+
 	void Loop() override {
 
 	}
 
 public:
 
-	TaskLogging()
-		: Task(_name, _stackSize, _priority) {}
+	TaskLogging(UART_HandleTypeDef& huart)
+		: Task(_name, _stackSize, _priority),
+		  _huart{huart} {}
 };

@@ -1,5 +1,6 @@
 #include "Program/cprogram.h"
 #include "Program/program.h"
+#include "usart.h"
 
 
 //function called from C code
@@ -30,5 +31,5 @@ TaskLogging* Program::_taskLogging;
 
 void Program::CreateTasks() {
 	_taskOutput = new TaskOutput();
-	_taskLogging = new TaskLogging();
+	_taskLogging = new TaskLogging(huart2);
 }
