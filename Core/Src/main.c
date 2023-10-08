@@ -95,11 +95,6 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_SPI_Transmit(&hspi2, &(uint8_t){0b00000101}, 1, 100);
-  HAL_GPIO_WritePin(SR_RCLK_GPIO_Port, SR_RCLK_Pin, GPIO_PIN_SET);
-  HAL_Delay(1);
-  HAL_GPIO_WritePin(SR_RCLK_GPIO_Port, SR_RCLK_Pin, GPIO_PIN_RESET);
-
   Init_CreateTasks();
 
   TIM_StartAllContinuousTimers();
