@@ -2,12 +2,12 @@
 
 #include "ShiftRegister/shift_register.h"
 #include "spi.h"
+#include "Tasks/task.h"
 
 static void TestTaskHandler(void* param);
 
 void Init_CreateTasks(void) {
 	xTaskCreate(TestTaskHandler, "Test task", 512, nullptr, 2, nullptr);
-
 }
 
 static void TestTaskHandler(void* param) {
