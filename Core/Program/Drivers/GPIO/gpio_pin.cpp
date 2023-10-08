@@ -9,7 +9,10 @@
 
 namespace Hardware {
 
-GPIO_Output GPIO_Output::dummyGPIO;
+GPIO_Output GPIO_Output::_dummyGPIO;
 
+GPIO_Output& GPIO_Output::GetDummyGPIO() {
+	return GPIO_Output::_dummyGPIO;
+}
 
 }

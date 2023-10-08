@@ -16,6 +16,8 @@ namespace Hardware {
 class GPIO_Output {
 private:
 
+	static GPIO_Output _dummyGPIO;
+
 	GPIO_TypeDef* _gpio;
 	uint16_t _pin;
 
@@ -65,7 +67,7 @@ public:
 		SetLow();
 	}
 
-	static GPIO_Output dummyGPIO;	//used for passing optional gpios by reference
+	static GPIO_Output& GetDummyGPIO();	//used for passing optional gpios by reference
 };
 
 }

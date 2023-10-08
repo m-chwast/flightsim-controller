@@ -31,8 +31,8 @@ public:
 
 	ShiftRegister(SPI_HandleTypeDef& spi,
 			Hardware::GPIO_Output& srStoreOutput,
-			Hardware::GPIO_Output& srEnable = Hardware::GPIO_Output::dummyGPIO,
-			Hardware::GPIO_Output& srClear = Hardware::GPIO_Output::dummyGPIO)
+			Hardware::GPIO_Output& srEnable = Hardware::GPIO_Output::GetDummyGPIO(),
+			Hardware::GPIO_Output& srClear = Hardware::GPIO_Output::GetDummyGPIO())
 	: _srEnable{srEnable}, _srClear{srClear}, _srStoreOutput{srStoreOutput}, _spi{spi} {
 
 		taskENTER_CRITICAL();
