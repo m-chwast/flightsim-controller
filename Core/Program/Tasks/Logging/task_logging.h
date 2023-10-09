@@ -10,6 +10,7 @@
 #include "Tasks/task.h"
 #include "usart.h"
 #include <cstring>
+#include "Tasks/Logging/console.h"
 
 class TaskLogging final : public Task {
 private:
