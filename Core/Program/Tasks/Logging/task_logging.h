@@ -9,6 +9,7 @@
 
 #include "Tasks/task.h"
 #include "usart.h"
+#include <cstring>
 
 class TaskLogging final : public Task {
 private:
@@ -20,7 +21,10 @@ private:
 	UART_HandleTypeDef& _huart;
 
 	void Loop() override {
+		const char msg[] = "Uart msg\r\n";
 
+		HAL_UART_Transmit(&_huart, reinterpret_cast<const uint8_t*>(msg), strlen(msg), HAL_MAX_DELAY);
+		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 
 public:
