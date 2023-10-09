@@ -26,10 +26,13 @@ void operator delete[](void* p) {
 	vPortFree(p);
 }
 
+Console* Program::_console;
 TaskOutput* Program::_taskOutput;
 TaskLogging* Program::_taskLogging;
 
 void Program::CreateTasks() {
+	_console = new Console();
+
 	_taskOutput = new TaskOutput();
 	_taskLogging = new TaskLogging(huart2);
 }
