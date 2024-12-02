@@ -17,13 +17,19 @@
  */
 
 #include <stdint.h>
+#include <vector>
+#include <string>
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+volatile int a = 15;
+
 int main(void)
 {
-    /* Loop forever */
-	for(;;);
+	  std::vector<int> v(1, 0);
+    std::string str = "123";
+	/* Loop forever */
+	for(;;) a++;
 }
