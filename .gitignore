@@ -5,3 +5,5 @@ STM32L152RETX_FLASH.ld
 STM32L152RETX_RAM.ld
 flightsim-controller Debug.launch
 .mxproject
+
+.settings/com.st.stm32cube.ide.mcu.sfrview.prefs
