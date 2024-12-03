@@ -69,40 +69,61 @@ set (PROJECT_INCLUDES
 #######################################################################
 
 ################## PROJECT SETUP ######################################
-project(${PROJECT_NAME})
+project(${PROJECT_NAME} C CXX ASM)
 
-enable_language(ASM)
-
-enable_language(C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set (OPTIMIZATION_LEVEL "-Og")
 
 
-if (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_EXECUTABLE})
-  add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-  add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${CMAKE_PROJECT_NAME}>)
-elseif (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_STATIC_LIBRARY})
-  add_library(${PROJECT_NAME} ${PROJECT_SOURCES})
+# Check if requested build is supported
+set(allowableBuildTypes Debug Release TestDebug)	# list of all available builds is here
+set_property(CACHE CMAKE_BUILD_TYPE PROPERTY
+STRINGS "${allowableBuildTypes}")
+# set default build type to Debug, throw error if build type not supported
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE Debug CACHE STRING "" FORCE)
+elseif(NOT CMAKE_BUILD_TYPE IN_LIST allowableBuildTypes)
+	message(FATAL_ERROR "Invalid build type: ${CMAKE_BUILD_TYPE}")
 endif()
 
-add_compile_definitions (${PROJECT_DEFINES})
-include_directories (${PROJECT_INCLUDES})
+
+if(${CMAKE_BUILD_TYPE} STREQUAL ["Debug"|"Release"])
+	set (TOOLCHAIN_OPTIONS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} \
+  		-ffunction-sections -fdata-sections -mthumb -fstack-usage")
+  	set (CMAKE_EXE_LINKER_FLAGS "-T${LINKER_SCRIPT} ${RUNTIME_LIBRARY_SYSCALLS} \
+		-Wl,-Map=test.map -Wl,--gc-sections -static -Wl,--start-group -lc -lm -Wl,--end-group")
+
+	if (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_EXECUTABLE})
+		add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+		add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${CMAKE_PROJECT_NAME}>)
+	elseif (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_STATIC_LIBRARY})
+		add_library(${PROJECT_NAME} ${PROJECT_SOURCES})
+	endif()
+	
+	add_compile_definitions (${PROJECT_DEFINES})
+	include_directories (${PROJECT_INCLUDES})
+	  
+elseif(${CMAKE_BUILD_TYPE} STREQUAL "TestDebug")
+
+	set (TOOLCHAIN_OPTIONS "")
+
+	add_subdirectory(Tests)
+	
+endif()
+
 
 set (CMAKE_EXECUTABLE_SUFFIX ".elf")
 set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 
-set (COMMON_C_CXX_FLAGS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} ${OPTIMIZATION_LEVEL} \
-	-ffunction-sections -fdata-sections -mthumb -fstack-usage -Wall -Werror")
+set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
+	-Wall -Werror")
 
 set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
 set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
 
-set (CMAKE_EXE_LINKER_FLAGS "-T${LINKER_SCRIPT} ${RUNTIME_LIBRARY_SYSCALLS} \
-	-Wl,-Map=test.map -Wl,--gc-sections -static -Wl,--start-group -lc -lm -Wl,--end-group")
 set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")

@@ -7,3 +7,7 @@ flightsim-controller Debug.launch
 .mxproject
 
 .settings/com.st.stm32cube.ide.mcu.sfrview.prefs
+
+build
+TestDebug
+Release
