@@ -64,9 +64,9 @@ set (OPTIMIZATION_LEVEL "-O0")
 set(allowableBuildTypes Debug Release TestDebug)	# list of all available builds is here
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY
 STRINGS "${allowableBuildTypes}")
-# set default build type to Debug, throw error if build type not supported
+# set default build type to TestDebug, throw error if build type not supported
 if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Debug CACHE STRING "" FORCE)
+	set(CMAKE_BUILD_TYPE TestDebug CACHE STRING "" FORCE)
 elseif(NOT CMAKE_BUILD_TYPE IN_LIST allowableBuildTypes)
 	message(FATAL_ERROR "Invalid build type: ${CMAKE_BUILD_TYPE}")
 endif()
