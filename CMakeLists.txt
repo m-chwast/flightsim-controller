@@ -120,6 +120,8 @@ elseif(${CMAKE_BUILD_TYPE} STREQUAL "TestDebug")
 	set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
 	set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
 
+	enable_testing()
+
 	add_subdirectory(Tests)
 
 endif()

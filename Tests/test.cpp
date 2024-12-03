@@ -1,5 +1,7 @@
 #include <iostream>
+#include "gtest/gtest.h"
 
-int main() {
-    std::cout << "Hello\n";
+
+TEST(Tests, Test1) {
+    EXPECT_FALSE(true);
 }
