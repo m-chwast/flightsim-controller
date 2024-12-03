@@ -81,6 +81,8 @@ enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set (OPTIMIZATION_LEVEL "-Og")
+
 
 if (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_EXECUTABLE})
   add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
@@ -95,7 +97,7 @@ include_directories (${PROJECT_INCLUDES})
 set (CMAKE_EXECUTABLE_SUFFIX ".elf")
 set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 
-set (COMMON_C_CXX_FLAGS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} \
+set (COMMON_C_CXX_FLAGS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} ${OPTIMIZATION_LEVEL} \
 	-ffunction-sections -fdata-sections -mthumb -fstack-usage -Wall -Werror")
 
 set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
