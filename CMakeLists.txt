@@ -97,7 +97,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release
 		#set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 
 		set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
-		-Wall -Werror")
+		-Wall -Wextra -Wpedantic -Werror")
 		set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
 		set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
 		set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
@@ -115,7 +115,7 @@ elseif(${CMAKE_BUILD_TYPE} STREQUAL "TestDebug")
 	set (TOOLCHAIN_OPTIONS "")
 
 	set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
-	-Wall -Werror")
+	-Wall -Wextra -Wpedantic -Werror")
 	set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
 	set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
 	set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
