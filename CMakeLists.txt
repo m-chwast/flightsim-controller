@@ -92,7 +92,7 @@ elseif(NOT CMAKE_BUILD_TYPE IN_LIST allowableBuildTypes)
 endif()
 
 
-if(${CMAKE_BUILD_TYPE} STREQUAL ["Debug"|"Release"])
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	set (TOOLCHAIN_OPTIONS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} \
   		-ffunction-sections -fdata-sections -mthumb -fstack-usage")
   	set (CMAKE_EXE_LINKER_FLAGS "-T${LINKER_SCRIPT} ${RUNTIME_LIBRARY_SYSCALLS} \
