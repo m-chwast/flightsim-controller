@@ -28,8 +28,11 @@ volatile int a = 15;
 
 int main(void)
 {
-	  std::vector<int> v(1, 0);
+	std::vector<int> v(1, 0);
+	std::vector<int> v2(10, 50);
+	std::vector<int> v3(1000, 10);
     std::string str = "123";
+    std::string str2 = "123133";
 	/* Loop forever */
 	for(;;) a++;
 }

@@ -44,26 +44,6 @@ set (RUNTIME_LIBRARY          "--specs=nano.specs")
 set (RUNTIME_LIBRARY_SYSCALLS "--specs=nosys.specs")
 
 
-set (PROJECT_SOURCES
-	# LIST SOURCE FILES HERE
-	Startup/startup_stm32f205vetx.s
-	Sources/main.cpp
-	Sources/syscalls.c
-	Sources/sysmem.c
-
-
-	)
-
-set (PROJECT_DEFINES
-	# LIST COMPILER DEFINITIONS HERE
-
-    )
-
-set (PROJECT_INCLUDES
-	# LIST INCLUDE DIRECTORIES HERE
-
-    )
-
 ############ MODIFY ACCORDING TO REQUIREMENTS) ########################
 
 #######################################################################
@@ -77,7 +57,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set (OPTIMIZATION_LEVEL "-Og")
+set (OPTIMIZATION_LEVEL "-O0")
 
 
 # Check if requested build is supported
@@ -99,31 +79,48 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release
 		-Wl,-Map=test.map -Wl,--gc-sections -static -Wl,--start-group -lc -lm -Wl,--end-group")
 
 	if (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_EXECUTABLE})
+		
+		set (PROJECT_SOURCES
+			Startup/startup_stm32f205vetx.s
+			Sources/syscalls.c
+			Sources/sysmem.c
+		)
+
 		add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+
+		target_link_libraries(${PROJECT_NAME} 
+			PRIVATE Sources)
+
 		add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${CMAKE_PROJECT_NAME}>)
+
+		set (CMAKE_EXECUTABLE_SUFFIX ".elf")
+		#set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
+
+		set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
+		-Wall -Werror")
+		set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
+		set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
+		set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
+
+		add_subdirectory(Sources)
+
 	elseif (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_STATIC_LIBRARY})
+
 		add_library(${PROJECT_NAME} ${PROJECT_SOURCES})
+
 	endif()
-	
-	add_compile_definitions (${PROJECT_DEFINES})
-	include_directories (${PROJECT_INCLUDES})
 	  
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "TestDebug")
 
 	set (TOOLCHAIN_OPTIONS "")
 
+	set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
+	-Wall -Werror")
+	set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
+	set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
+	set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
+
 	add_subdirectory(Tests)
-	
+
 endif()
 
-
-set (CMAKE_EXECUTABLE_SUFFIX ".elf")
-set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
-
-set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
-	-Wall -Werror")
-
-set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
-set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
-
-set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
