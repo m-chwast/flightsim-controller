@@ -37,7 +37,7 @@ set (MFLOAT_ABI_MIX                   "-mfloat-abi=softfp")
 ###################### VARIABLES ######################################
 set (PROJECT_NAME             "flightsim-controller")
 set (PROJECT_TYPE             "exe")
-set (LINKER_SCRIPT            "../STM32F205VETX_FLASH.ld")
+set (LINKER_SCRIPT            "../../STM32F205VETX_FLASH.ld") # two directories up because it refers to the executable position (in Sources)
 set (MCPU                     "-mcpu=Cortex-M3")
 set (MFLOAT_ABI               "")
 set (RUNTIME_LIBRARY          "--specs=nano.specs")
@@ -80,22 +80,6 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release
 
 	if (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_EXECUTABLE})
 		
-		set (PROJECT_SOURCES
-			Startup/startup_stm32f205vetx.s
-			Sources/syscalls.c
-			Sources/sysmem.c
-		)
-
-		add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
-
-		target_link_libraries(${PROJECT_NAME} 
-			PRIVATE 
-			Sources
-			st_drivers
-		)
-
-		add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${CMAKE_PROJECT_NAME}>)
-
 		set (CMAKE_EXECUTABLE_SUFFIX ".elf")
 		set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 

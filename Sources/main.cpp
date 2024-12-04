@@ -20,11 +20,11 @@
 #include <vector>
 #include <string>
 
-#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-#endif
+#include "main.h"
 
-volatile int a = 15;
+void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
+
 
 int main(void)
 {
@@ -33,6 +33,10 @@ int main(void)
 	std::vector<int> v3(1000, 10);
     std::string str = "123";
     std::string str2 = "123133";
+
+
+    HAL_Init();
+
 	/* Loop forever */
-	for(;;) a++;
+	for(;;);
 }
