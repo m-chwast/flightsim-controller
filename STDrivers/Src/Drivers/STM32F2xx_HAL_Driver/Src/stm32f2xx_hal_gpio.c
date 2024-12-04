@@ -317,7 +317,7 @@ void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
 
       tmp = SYSCFG->EXTICR[position >> 2u];
       tmp &= (0x0FuL << (4u * (position & 0x03u)));
-      if (tmp == (GPIO_GET_INDEX(GPIOx) << (4u * (position & 0x03u))))
+      if (tmp == (uint32_t)((GPIO_GET_INDEX(GPIOx) << (4u * (position & 0x03u)))))
       {
         /* Clear EXTI line configuration */
         EXTI->IMR &= ~((uint32_t)iocurrent);
