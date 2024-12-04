@@ -83,7 +83,7 @@ return 0;
 /* USER CODE END 1 */
 
 /* USER CODE BEGIN 4 */
-__weak void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
+__weak void vApplicationStackOverflowHook(__attribute__((unused)) xTaskHandle xTask, __attribute__((unused)) signed char *pcTaskName)
 {
    /* Run time stack overflow checking is performed if
    configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
@@ -161,7 +161,7 @@ void MX_FREERTOS_Init(void) {
   * @retval None
   */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument)
+void StartDefaultTask(__attribute__((unused)) void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
