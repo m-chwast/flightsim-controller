@@ -1,13 +1,8 @@
-Debug
-Drivers
-Middlewares
-STM32L152RETX_FLASH.ld
-STM32L152RETX_RAM.ld
-flightsim-controller Debug.launch
-.mxproject
+/Debug
+/Release
+/TestDebug
+/build
 
-.settings/com.st.stm32cube.ide.mcu.sfrview.prefs
+/flightsim-controller Debug.launch
 
-build
-TestDebug
-Release
+/.settings/com.st.stm32cube.ide.mcu.sfrview.prefs
