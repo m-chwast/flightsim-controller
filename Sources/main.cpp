@@ -31,6 +31,7 @@ void SystemClock_Config(void);
 
 int main(void) {
     HAL_Init();
+    SystemClock_Config();
 
     MX_GPIO_Init();
     MX_CAN1_Init();

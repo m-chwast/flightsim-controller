@@ -3,6 +3,9 @@ set (PROJECT_SOURCES
     System/startup_stm32f205vetx.s
     System/syscalls.c
     System/sysmem.c
+    System/stm32f2xx_it.c
+    System/system_stm32f2xx.c
+    
 )
 
 set (EXE_NAME "flightsim-controller")

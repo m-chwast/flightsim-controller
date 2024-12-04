@@ -24,7 +24,6 @@ target_sources(st_drivers PRIVATE
     Core/Src/spi.c
     Core/Src/usart.c
     Core/Src/usb_otg.c
-    Core/Src/stm32f2xx_it.c
     Core/Src/stm32f2xx_hal_msp.c
     Core/Src/stm32f2xx_hal_timebase_tim.c
     Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_can.c
@@ -48,7 +47,6 @@ target_sources(st_drivers PRIVATE
     Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_pcd_ex.c
     Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_pcd.c
     Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_ll_usb.c
-    Core/Src/system_stm32f2xx.c
     Middlewares/Third_Party/FreeRTOS/Source/croutine.c
     Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
     Middlewares/Third_Party/FreeRTOS/Source/list.c
