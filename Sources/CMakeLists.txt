@@ -6,6 +6,7 @@ set (PROJECT_SOURCES
     System/stm32f2xx_it.c
     System/system_stm32f2xx.c
     System/system_init.c
+    System/system_irq_callbacks.c
 )
 
 set (EXE_NAME "flightsim-controller")
