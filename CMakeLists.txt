@@ -57,7 +57,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set (OPTIMIZATION_LEVEL "-O0")
+set (OPTIMIZATION_LEVEL "-Og")
 
 
 # Check if requested build is supported
