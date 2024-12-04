@@ -16,25 +16,13 @@
  ******************************************************************************
  */
 
-#include <stdint.h>
-#include <vector>
-#include <string>
-
 #include "main.h"
 
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 
-
 int main(void)
 {
-	std::vector<int> v(1, 0);
-	std::vector<int> v2(10, 50);
-	std::vector<int> v3(1000, 10);
-    std::string str = "123";
-    std::string str2 = "123133";
-
-
     HAL_Init();
 
 	/* Loop forever */
