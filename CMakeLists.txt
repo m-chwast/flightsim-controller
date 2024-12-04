@@ -89,12 +89,15 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release
 		add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 		target_link_libraries(${PROJECT_NAME} 
-			PRIVATE Sources)
+			PRIVATE 
+			Sources
+			st_drivers
+		)
 
 		add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${CMAKE_PROJECT_NAME}>)
 
 		set (CMAKE_EXECUTABLE_SUFFIX ".elf")
-		#set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
+		set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 
 		set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
 		-Wall -Wextra -Wpedantic -Werror")
@@ -103,6 +106,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release
 		set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
 
 		add_subdirectory(Sources)
+		add_subdirectory(STDrivers)
 
 	elseif (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_STATIC_LIBRARY})
 
