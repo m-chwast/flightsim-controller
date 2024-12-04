@@ -1,5 +1,5 @@
-#ifndef _SYSTEM_SYSTEM_INIT_H_
-#define _SYSTEM_SYSTEM_INIT_H_
+#ifndef _HAL_DRIVER_HAL_DRIVER_INIT_H_
+#define _HAL_DRIVER_HAL_DRIVER_INIT_H_
 
 #ifdef __cplusplus
 extern "C" {

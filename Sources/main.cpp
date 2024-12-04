@@ -17,7 +17,7 @@
  */
 
 
-#include "System/system_init.h"
+#include "HALDriver/hal_driver_init.h"
 
 void SystemClock_Config(void);
 
