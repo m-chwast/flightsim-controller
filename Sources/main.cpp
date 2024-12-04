@@ -19,6 +19,7 @@
 #include "main.h"
 
 #include "cmsis_os.h"
+#include "freertos_mx_init.h"
 #include "can.h"
 #include "i2c.h"
 #include "spi.h"
@@ -27,7 +28,6 @@
 #include "gpio.h"
 
 void SystemClock_Config(void);
-void MX_FREERTOS_Init(void);
 
 int main(void) {
     HAL_Init();
