@@ -1,11 +1,11 @@
 add_library(st_drivers)
 
-target_compile_definitions(st_drivers PRIVATE
+target_compile_definitions(st_drivers PUBLIC
 	USE_HAL_DRIVER 
 	STM32F205xx
 )
 
-target_include_directories(st_drivers PRIVATE
+target_include_directories(st_drivers PUBLIC
     Core/Inc
     Drivers/STM32F2xx_HAL_Driver/Inc
     Drivers/STM32F2xx_HAL_Driver/Inc/Legacy
@@ -17,7 +17,6 @@ target_include_directories(st_drivers PRIVATE
 )
 
 target_sources(st_drivers PRIVATE
-    Core/Src/main.c
     Core/Src/gpio.c
     Core/Src/freertos.c
     Core/Src/can.c
