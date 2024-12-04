@@ -26,7 +26,7 @@
  *  
  *----------------------------------------------------------------------------
  *
- * Portions Copyright © 2016 STMicroelectronics International N.V. All rights reserved.
+ * Portions Copyright ï¿½ 2016 STMicroelectronics International N.V. All rights reserved.
  * Portions Copyright (c) 2013 ARM LIMITED
  * All rights reserved.
  * Redistribution and use in source and binary forms, with or without
@@ -1635,7 +1635,11 @@ osStatus osMessageDelete (osMessageQId queue_id)
 * @param  mutex_def     mutex definition referenced with \ref osMutex.
 * @retval  mutex ID for reference by other functions or NULL in case of error..
 */
-osMutexId osRecursiveMutexCreate (const osMutexDef_t *mutex_def)
+osMutexId osRecursiveMutexCreate (
+#if(configUSE_RECURSIVE_MUTEXES != 1)
+__attribute((unused))
+#endif
+  const osMutexDef_t *mutex_def)
 {
 #if (configUSE_RECURSIVE_MUTEXES == 1)
 #if( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
@@ -1661,7 +1665,11 @@ osMutexId osRecursiveMutexCreate (const osMutexDef_t *mutex_def)
 * @param   mutex_id      mutex ID obtained by \ref osRecursiveMutexCreate.
 * @retval  status code that indicates the execution status of the function.
 */
-osStatus osRecursiveMutexRelease (osMutexId mutex_id)
+osStatus osRecursiveMutexRelease (
+#if(configUSE_RECURSIVE_MUTEXES != 1)
+__attribute((unused))
+#endif
+  osMutexId mutex_id)
 {
 #if (configUSE_RECURSIVE_MUTEXES == 1)
   osStatus result = osOK;
@@ -1682,7 +1690,15 @@ osStatus osRecursiveMutexRelease (osMutexId mutex_id)
 * @param millisec      timeout value or 0 in case of no time-out.
 * @retval  status code that indicates the execution status of the function.
 */
-osStatus osRecursiveMutexWait (osMutexId mutex_id, uint32_t millisec)
+osStatus osRecursiveMutexWait (
+#if(configUSE_RECURSIVE_MUTEXES != 1)
+__attribute((unused))
+#endif
+  osMutexId mutex_id,
+#if(configUSE_RECURSIVE_MUTEXES != 1)
+__attribute((unused))
+#endif
+  uint32_t millisec)
 {
 #if (configUSE_RECURSIVE_MUTEXES == 1)
   TickType_t ticks;
