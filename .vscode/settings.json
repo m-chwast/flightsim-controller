@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "timers.h": "c"
+        "timers.h": "c",
+        "cmsis_os.h": "c",
+        "stm32f2xx_hal.h": "c",
+        "stm32f2xx_hal_conf.h": "c"
     }
 }
