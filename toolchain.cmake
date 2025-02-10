@@ -1,8 +1,3 @@
-# CMake toolchain definition for STM32CubeIDE
-
-set (CMAKE_SYSTEM_PROCESSOR "arm" CACHE STRING "")
-set (CMAKE_SYSTEM_NAME "Generic" CACHE STRING "")
-
 # Skip link step during toolchain validation.
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
