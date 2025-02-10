@@ -1,0 +1,14 @@
+buildType:
+  default: debug
+  description: Selected build type
+  choices:
+    debug:
+      short: Debug
+      long: Debug build for embedded target
+      buildType: Debug
+      settings:
+        CMAKE_TOOLCHAIN_FILE: toolchain.cmake
+    testDebug:
+      short: TestDebug
+      long: Debug build on current platform for unit tests
+      buildType: TestDebug
