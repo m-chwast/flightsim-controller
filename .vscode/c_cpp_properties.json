@@ -16,8 +16,28 @@
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
-            "cppStandard": "gnu++14",
+            "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        },
+        {
+            "name": "Win",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/STDrivers/Src/Core/Inc",
+                "${workspaceFolder}/STDrivers/Src/Drivers/STM32F2xx_HAL_Driver/Inc",
+                "${workspaceFolder}/STDrivers/Src/Drivers/STM32F2xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/STDrivers/Src/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceFolder}/STDrivers/Src/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS",
+                "${workspaceFolder}/STDrivers/Src/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3",
+                "${workspaceFolder}/STDrivers/Src/Drivers/CMSIS/Device/ST/STM32F2xx/Include",
+                "${workspaceFolder}/STDrivers/Src/Drivers/CMSIS/Include"
+            ],
+            "defines": [],
+            "compilerPath": "C:/msys64/ucrt64/bin/gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-x64",
             "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
