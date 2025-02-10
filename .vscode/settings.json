@@ -1,4 +1,6 @@
 {
+    "cortex-debug.armToolchainPath": "${workspaceRoot}/../Toolchain/tools/bin",
+    "cmake.buildDirectory": "${workspaceFolder}/${buildType}",
     "files.associations": {
         "*.h": "c",
         "*.hpp": "cpp"
