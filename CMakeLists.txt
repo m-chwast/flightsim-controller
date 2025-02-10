@@ -73,44 +73,37 @@ endif()
 
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release")
-	set (TOOLCHAIN_OPTIONS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} \
-  		-ffunction-sections -fdata-sections -mthumb -fstack-usage")
-  	set (CMAKE_EXE_LINKER_FLAGS "-T${LINKER_SCRIPT} ${RUNTIME_LIBRARY_SYSCALLS} \
-		-Wl,-Map=test.map -Wl,--gc-sections -static -Wl,--start-group -lc -lm -Wl,--end-group")
 
-	if (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_EXECUTABLE})
-		
-		set (CMAKE_EXECUTABLE_SUFFIX ".elf")
-		set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
+set (TOOLCHAIN_OPTIONS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} \
+	-ffunction-sections -fdata-sections -mthumb -fstack-usage")
+set (CMAKE_EXE_LINKER_FLAGS "-T${LINKER_SCRIPT} ${RUNTIME_LIBRARY_SYSCALLS} \
+	-Wl,-Map=test.map -Wl,--gc-sections -static -Wl,--start-group -lc -lm -Wl,--end-group")
+	
+set (CMAKE_EXECUTABLE_SUFFIX ".elf")
+set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 
-		set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
-		-Wall -Wextra -Wpedantic -Werror")
-		set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
-		set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
-		set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
+set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
+	-Wall -Wextra -Wpedantic -Werror")
+set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
+set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
+set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
 
-		add_subdirectory(Sources)
-		add_subdirectory(STDrivers)
-
-	elseif (${PROJECT_TYPE} MATCHES ${PROJECT_TYPE_STATIC_LIBRARY})
-
-		add_library(${PROJECT_NAME} ${PROJECT_SOURCES})
-
-	endif()
-	  
+add_subdirectory(Sources)
+add_subdirectory(STDrivers)
+  
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "TestDebug")
 
-	set (TOOLCHAIN_OPTIONS "")
+set (TOOLCHAIN_OPTIONS "")
 
-	set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
+set (COMMON_C_CXX_FLAGS "${TOOLCHAIN_OPTIONS} ${OPTIMIZATION_LEVEL} \
 	-Wall -Wextra -Wpedantic -Werror")
-	set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
-	set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
-	set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
+set (CMAKE_C_FLAGS "${COMMON_C_CXX_FLAGS}")
+set (CMAKE_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-exceptions -fno-rtti -fno-use-cxa-atexit")
+set (CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS} -x assembler-with-cpp")
 
-	enable_testing()
+enable_testing()
 
-	add_subdirectory(Tests)
+add_subdirectory(Tests)
 
 endif()
 
