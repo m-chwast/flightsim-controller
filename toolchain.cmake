@@ -3,7 +3,11 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 set(MCU_TOOLCHAIN_PATH "${CMAKE_SOURCE_DIR}/../Toolchain/tools/bin")
 set(TOOLCHAIN_PREFIX   "${MCU_TOOLCHAIN_PATH}/arm-none-eabi-")
+
+# support for windows compiling
+if(WIN32)
 set(TOOLCHAIN_SUFFIX   ".exe")
+endif()
 
 set(CMAKE_C_COMPILER   "${TOOLCHAIN_PREFIX}gcc${TOOLCHAIN_SUFFIX}")
 set(CMAKE_ASM_COMPILER "${TOOLCHAIN_PREFIX}gcc${TOOLCHAIN_SUFFIX}")
