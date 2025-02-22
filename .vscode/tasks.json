@@ -3,9 +3,24 @@
 	"tasks": [
 		{
 			"type": "shell",
+			"label": "CMake Debug build",
+			"command": "cmake",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"args": [
+				"--build",
+				"Debug",
+				"-j"
+			],
+			"detail": "Builds for STM32 target"
+		},
+		{
+			"type": "shell",
 			"label": "CMake test build",
 			"command": "cmake",
-			"group": "build",
+			"group": "test",
 			"args": [
 				"--build",
 				"TestDebug",
@@ -17,7 +32,7 @@
 			"label": "CTest run",
 			"type": "shell",
 			"group": {
-				"kind": "build",
+				"kind": "test",
 				"isDefault": true
 			},
 			"command": "ctest",
