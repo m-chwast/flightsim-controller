@@ -8,6 +8,7 @@
 #include "spi.h"
 #include "usart.h"
 #include "usb_otg.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 static void SystemClock_Config(void);
@@ -30,7 +31,7 @@ void System_Init(void) {
     MX_USART2_UART_Init();
     MX_USART3_UART_Init();
     MX_USART6_UART_Init();
-    MX_USB_OTG_FS_PCD_Init();
+	MX_USB_DEVICE_Init();
 }
 
 void System_StartOS(void) {

@@ -18,9 +18,10 @@ target_include_directories(st_drivers PUBLIC
     # USB driver includes
     Middlewares/ST/STM32_USB_Device_Library/Core/Inc
     Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+    USB_DEVICE/App
     USB_DEVICE/Target
-)
-
+    )
+    
 target_sources(st_drivers PRIVATE
     Core/Src/gpio.c
     Core/Src/freertos.c
