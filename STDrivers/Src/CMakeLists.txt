@@ -6,6 +6,7 @@ target_compile_definitions(st_drivers PUBLIC
 )
 
 target_include_directories(st_drivers PUBLIC
+    # General driver includes
     Core/Inc
     Drivers/STM32F2xx_HAL_Driver/Inc
     Drivers/STM32F2xx_HAL_Driver/Inc/Legacy
@@ -14,6 +15,10 @@ target_include_directories(st_drivers PUBLIC
     Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3
     Drivers/CMSIS/Device/ST/STM32F2xx/Include
     Drivers/CMSIS/Include
+    # USB driver includes
+    Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+    USB_DEVICE/Target
 )
 
 target_sources(st_drivers PRIVATE
@@ -57,6 +62,15 @@ target_sources(st_drivers PRIVATE
     Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c
     Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
     Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c
+    # USB drivers
+    Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
+    Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+    Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+    Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c
+    USB_DEVICE/App/usb_device.c
+    USB_DEVICE/App/usbd_cdc_if.c
+    USB_DEVICE/App/usbd_desc.c
+    USB_DEVICE/Target/usbd_conf.c
 )
 
 if(CMAKE_C_STANDARD LESS 11)
