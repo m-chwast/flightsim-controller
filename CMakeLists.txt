@@ -77,7 +77,8 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "Release
 set (TOOLCHAIN_OPTIONS "${MCPU} ${MFPU} ${MFLOAT_ABI} ${RUNTIME_LIBRARY} \
 	-ffunction-sections -fdata-sections -mthumb -fstack-usage")
 set (CMAKE_EXE_LINKER_FLAGS "-T${LINKER_SCRIPT} ${RUNTIME_LIBRARY_SYSCALLS} \
-	-Wl,-Map=test.map -Wl,--gc-sections -static -Wl,--start-group -lc -lm -Wl,--end-group")
+	-Wl,-Map=test.map -Wl,--gc-sections -static -Wl,--start-group -lc -lm -Wl,--end-group \
+	-Wl,--print-memory-usage")
 	
 set (CMAKE_EXECUTABLE_SUFFIX ".elf")
 set (CMAKE_STATIC_LIBRARY_SUFFIX ".a")
