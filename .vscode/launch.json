@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (ST-Link)",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/Debug/Sources/flightsim-controller.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "stutil",
+            "interface": "swd",
+            "device": "STM32F205VE",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "${defaultBuildTask}",
+            "svdFile": "${workspaceRoot}/../Toolchain/svd/STM32F2x5.svd",
+        }
+    ]
+}

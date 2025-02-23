@@ -1,0 +1,52 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "CMake Debug build",
+			"command": "cmake",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"args": [
+				"--build",
+				"Debug",
+				"-j"
+			],
+			"detail": "Builds for STM32 target"
+		},
+		{
+			"type": "shell",
+			"label": "CMake test build",
+			"command": "cmake",
+			"group": "test",
+			"args": [
+				"--build",
+				"TestDebug",
+				"-j"
+			],
+			"detail": "Builds tests via CMake"
+		},
+		{
+			"label": "CTest run",
+			"type": "shell",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"command": "ctest",
+			"args": [
+				"--test-dir",
+				"TestDebug",
+				"--output-on-failure",
+				"-j"
+			],
+			// this is to always run build before tests
+			"dependsOn": [
+				"CMake test build"
+			],
+			"detail": "Run all tests via CTest"
+		}
+	]
+}
