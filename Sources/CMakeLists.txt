@@ -13,9 +13,12 @@ add_executable(${EXE_NAME} ${PROJECT_SOURCES})
 
 target_link_libraries(${EXE_NAME} 
     PRIVATE hal_driver 
+    drivers
+    # external libraries
     st_drivers
 )
 
 add_custom_command(TARGET ${EXE_NAME} POST_BUILD COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${EXE_NAME}>)
 
 add_subdirectory(HALDriver)
+add_subdirectory(Drivers)
