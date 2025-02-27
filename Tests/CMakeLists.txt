@@ -14,6 +14,12 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(test_exe test.cpp)
 
+include_directories(
+  "${CMAKE_SOURCE_DIR}/Sources"
+)
+
+add_subdirectory(Utils)
+
 target_link_libraries(
     test_exe
     GTest::gtest_main

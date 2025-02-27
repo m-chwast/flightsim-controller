@@ -7,7 +7,9 @@ namespace Drivers {
 class Usb {
     constexpr static unsigned _inBufferSize = 256;
     
-    Utils::CircBuffer<_inBufferSize> _inBuffer;
+    char _inBufferStorage[_inBufferSize];
+
+    Utils::CircBuffer _inBuffer{_inBufferStorage, sizeof(_inBufferStorage)};
 };
 
 }

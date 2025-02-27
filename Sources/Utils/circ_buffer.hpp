@@ -1,12 +1,21 @@
 #pragma once
 
-#include <array>
-
 namespace Utils {
 
-template <unsigned size>
 class CircBuffer {
-    std::array<char, size> _data;
+private:
+
+    const char* _buff;
+    const unsigned _capacity;
+    
+public:
+
+    CircBuffer(char* buff, unsigned size)
+        : _buff{buff}, _capacity{size} {
+
+    } 
+
+    unsigned GetCapacity() const;
 
 };
 
