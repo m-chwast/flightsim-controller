@@ -1,9 +1,13 @@
 #include "HALDriver/hal_driver_init.h"
+#include "Drivers/usb.hpp"
 
-void SystemClock_Config(void);
+ 
 
 int main(void) {
 	System_Init();
+
+	static Drivers::Usb usb;
+	(void)usb;
 
 	System_StartOS();
 	
