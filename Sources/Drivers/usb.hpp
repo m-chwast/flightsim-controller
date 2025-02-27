@@ -1,12 +1,13 @@
 #pragma once
 
-#include <array>
+#include "Utils/circ_buffer.hpp"
 
 namespace Drivers {
 
 class Usb {
     constexpr static unsigned _inBufferSize = 256;
-    std::array<char, _inBufferSize> _inBuffer;
+    
+    Utils::CircBuffer<_inBufferSize> _inBuffer;
 };
 
 }

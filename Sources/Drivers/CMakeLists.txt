@@ -6,4 +6,5 @@ add_library(drivers
 
 target_link_libraries(drivers
     PRIVATE st_drivers
+    utils
 )
