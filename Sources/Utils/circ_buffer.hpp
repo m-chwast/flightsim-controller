@@ -5,7 +5,7 @@ namespace Utils {
 class CircBuffer {
 private:
 
-    const char* _buff;
+    char* const _buff;
     const unsigned _capacity;
 
     unsigned _size;
@@ -20,6 +20,11 @@ public:
 
     unsigned GetCapacity() const;
     unsigned GetSize() const;
+
+    bool Append(char c);
+
+    char Peek() const;
+    char GetNext();
 };
 
 }
