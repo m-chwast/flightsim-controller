@@ -11,7 +11,7 @@ unsigned CircBuffer::GetSize() const {
 }
 
 bool CircBuffer::Append(char c) {
-    _buff[_size] = c;
+    _buff[_curr + _size] = c;
     _size++;
     return false;
 }

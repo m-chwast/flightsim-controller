@@ -52,3 +52,19 @@ TEST(CircBufferTests, GetNextLowersSize) {
     cb.GetNext();
     EXPECT_EQ(cb.GetSize(), 0);
 }
+
+TEST(CircBufferTests, AppendingAfterGettingDataWorks) {
+    char buff[10];
+    CircBuffer cb{buff, 10};
+    cb.Append('a');
+    cb.Append('b');
+    cb.GetNext();
+    
+    cb.Append('c');
+    
+    EXPECT_EQ(cb.GetSize(), 2);
+    char b = cb.GetNext();
+    char c = cb.GetNext();
+    EXPECT_EQ(b, 'b');
+    EXPECT_EQ(c, 'c');
+}
