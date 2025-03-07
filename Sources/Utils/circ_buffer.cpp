@@ -21,7 +21,11 @@ char CircBuffer::Peek() const {
 }
 
 char CircBuffer::GetNext() {
-    return 0;
+    char c = _buff[_curr];
+    _buff[_curr] = 0;
+    _curr++;
+    _size--;
+    return c;
 }
 
 }

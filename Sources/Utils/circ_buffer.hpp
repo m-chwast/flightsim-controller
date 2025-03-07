@@ -8,8 +8,8 @@ private:
     char* const _buff;
     const unsigned _capacity;
 
-    unsigned _size;
-    unsigned _curr;
+    unsigned _size = 0;
+    unsigned _curr = 0;
 
 public:
 

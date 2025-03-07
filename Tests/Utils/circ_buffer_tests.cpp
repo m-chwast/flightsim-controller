@@ -18,11 +18,37 @@ TEST(CircBufferTests, GetSizeInitTo0) {
 }
 
 TEST(CircBufferTests, AppendIncreasesSize) {
-    char buff[1000];
-    CircBuffer a{buff, 1000};
+    char buff[10];
+    CircBuffer a{buff, 10};
     a.Append('c');
     EXPECT_EQ(a.GetSize(), 1);
     a.Append('a');
     a.Append('b');
     EXPECT_EQ(a.GetSize(), 3);
+}
+
+TEST(CircBufferTests, GetNextReturnsData) {
+    char buff[10];
+    CircBuffer cb{buff, 10};
+    cb.Append('a');
+    cb.Append('b');
+    
+    char a = cb.GetNext();
+    char b = cb.GetNext();
+
+    EXPECT_EQ(a, 'a');
+    EXPECT_EQ(b, 'b');
+}
+
+TEST(CircBufferTests, GetNextLowersSize) {
+    char buff[10];
+    CircBuffer cb{buff, 10};
+    cb.Append('a');
+    cb.Append('b');
+    
+    EXPECT_EQ(cb.GetSize(), 2);
+    cb.GetNext();
+    EXPECT_EQ(cb.GetSize(), 1);
+    cb.GetNext();
+    EXPECT_EQ(cb.GetSize(), 0);
 }
