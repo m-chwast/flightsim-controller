@@ -7,7 +7,10 @@ private:
 
     const char* _buff;
     const unsigned _capacity;
-    
+
+    unsigned _size;
+    unsigned _curr;
+
 public:
 
     CircBuffer(char* buff, unsigned size)
@@ -16,7 +19,7 @@ public:
     } 
 
     unsigned GetCapacity() const;
-
+    unsigned GetSize() const;
 };
 
 }

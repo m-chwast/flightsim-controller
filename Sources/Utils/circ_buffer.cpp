@@ -6,4 +6,8 @@ unsigned CircBuffer::GetCapacity() const {
     return _capacity;
 }
 
+unsigned CircBuffer::GetSize() const {
+    return _size;
+}
+
 }

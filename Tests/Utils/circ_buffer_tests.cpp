@@ -10,3 +10,9 @@ TEST(CircBufferTests, GetCapacityWorks) {
     CircBuffer b{buff, 10};
     EXPECT_EQ(b.GetCapacity(), 10);
 }
+
+TEST(CircBufferTests, GetSizeInitTo0) {
+    char buff[1000];
+    CircBuffer a{buff, 1000};
+    EXPECT_EQ(a.GetSize(), 0);
+}

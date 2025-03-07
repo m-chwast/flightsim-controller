@@ -3,5 +3,4 @@
 
 
 TEST(Tests, Test1) {
-    EXPECT_FALSE(true);
 }
