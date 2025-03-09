@@ -17,6 +17,19 @@ TEST(CircBufferTests, GetSizeInitTo0) {
     EXPECT_EQ(a.GetSize(), 0);
 }
 
+TEST(CircBufferTests, BufferIsZeroInitialized) {
+    char buff[1024];
+    memset(buff, 'f', sizeof(buff));
+
+    // create smaller buffer, one byte should not be erased
+    CircBuffer(buff, sizeof(buff) - 1);
+
+    for(unsigned i = 0; i < sizeof(buff) - 1; i++) {
+        EXPECT_EQ(buff[i], 0);
+    }
+    EXPECT_EQ(buff[sizeof(buff) - 1], 'f');
+}
+
 TEST(CircBufferTests, AppendIncreasesSize) {
     char buff[10];
     CircBuffer a{buff, 10};

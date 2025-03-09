@@ -1,4 +1,5 @@
 #include "circ_buffer.hpp"
+#include <cstring>
 
 namespace Utils {
 
@@ -26,6 +27,10 @@ char CircBuffer::GetNext() {
     _curr++;
     _size--;
     return c;
+}
+
+void CircBuffer::Clear() {
+    memset(_buff, 0, GetCapacity());
 }
 
 }

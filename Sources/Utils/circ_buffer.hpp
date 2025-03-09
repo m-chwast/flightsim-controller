@@ -15,7 +15,7 @@ public:
 
     CircBuffer(char* buff, unsigned size)
         : _buff{buff}, _capacity{size} {
-
+        Clear();
     } 
 
     unsigned GetCapacity() const;
@@ -25,6 +25,8 @@ public:
 
     char Peek() const;
     char GetNext();
+
+    void Clear();
 };
 
 }
